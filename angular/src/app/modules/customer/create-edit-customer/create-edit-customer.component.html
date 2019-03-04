@@ -1,0 +1,55 @@
+<form [formGroup]="formCreateEdit" (ngSubmit)="save()">
+  <h1 mat-dialog-title>{{title}}</h1>
+  <mat-dialog-content style="width:800px">
+    <common-input
+                type="text"
+                fullWidth="true"
+                [formControl]="formCreateEdit.controls.name"
+                [data]="{
+                  labelTop: 'Name'
+                }"
+    >
+    </common-input>
+    <common-input
+                type="text"
+                fullWidth="true"
+                [formControl]="formCreateEdit.controls.address"
+                [data]="{
+                  labelTop: 'Address'
+                }"
+    >
+    </common-input>
+    <common-input
+                type="text"
+                fullWidth="true"
+                [formControl]="formCreateEdit.controls.phone"
+                [data]="{
+                  labelTop: 'Phone'
+                }"
+    >
+    </common-input>
+    <common-input
+                type="text"
+                fullWidth="true"
+                [formControl]="formCreateEdit.controls.email"
+                [data]="{
+                  labelTop: 'Email'
+                }"
+    >
+    </common-input>
+  </mat-dialog-content>
+  <div mat-dialog-actions align="end">
+    <button mat-button type="button" (click)="close(false)">
+      Cancel
+    </button>
+    <button
+      mat-flat-button
+      type="submit"
+      flex="15"
+      color="primary"
+    >
+      Save
+    </button>
+  </div>
+</form>
+<!-- [disabled]="!formCreateEdit.valid || saving" -->

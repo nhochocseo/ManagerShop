@@ -1,0 +1,175 @@
+<form autocomplete="off" #createUserModal="ngForm" (ngSubmit)="save()">
+  <h1 mat-dialog-title>{{title}}</h1>
+  <mat-dialog-content style="width:900px">
+    <mat-tab-group>
+      <mat-tab [formGroup]="formCreateEdit" label="General">
+        <div class="row">
+          <div class="col-md-2">
+            <label>Client</label>
+          </div>
+          <div class="col-md-6">
+              <mat-form-field>
+                <mat-select formControlName="projectCustomers" placeholder="Choose a client..."  name="isActive" multiple>
+                  <mat-option *ngFor="let cus of listCustomer" [value]="cus.id" >{{ cus.name }}</mat-option>
+                </mat-select>
+              </mat-form-field>
+          </div>
+          <div class="col-md-4">
+            <span style="padding-right: 20px;">or</span>
+            <button
+              mat-flat-button
+              color="primary"
+              (click)="createCustomer()"
+            >
+              <mat-icon>add</mat-icon>
+              New Client
+            </button>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-2">
+            <label>Project Name</label>
+          </div>
+          <div class="col-md-6">
+              <mat-form-field >
+                <input formControlName="name" matInput placeholder="NameProject" />
+              </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-2">
+            <label>Project Code</label>
+          </div>
+          <div class="col-md-10">
+              <mat-form-field class="inline">
+                <input  formControlName="code" matInput />
+              </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-2">
+            <label>Dates</label>
+          </div>
+          <div class="col-md-10">
+              <mat-form-field class="inline">
+                <input formControlName="timeStart" matInput [matDatepicker]="picker" placeholder="Start on" />
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field>
+              <span style="padding:0 20px;">to</span>
+              <mat-form-field class="inline">
+                <input formControlName="timeEnd" matInput [matDatepicker]="pick"  placeholder="Ends on" />
+                <mat-datepicker-toggle matSuffix [for]="pick"></mat-datepicker-toggle>
+                <mat-datepicker #pick></mat-datepicker>
+              </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-2">
+            <label>Note</label>
+          </div>
+          <div class="col-md-10">
+              <mat-form-field class="example-full-width">
+                <textarea formControlName="note" matInput placeholder="Note"></textarea>
+              </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-2">
+            <label>Project Type</label>
+          </div>
+          <div class="col-md-10">
+              <div class="row">
+                <div class="col-md-4">
+                    <label class="i-check">
+                      <input formControlName="projectType" type="radio" name="projectType" [value]="projectTypes.Timeandmaterials"> 
+                      <span>Time & Meterials</span>
+                    </label>
+                </div>
+                <div class="col-md-4">
+                    <label class="i-check" >
+                      <input formControlName="projectType" type="radio" name="projectType" [value]="projectTypes.Fixedfee"> 
+                      <span>Fixed Fee</span>
+                    </label>
+                </div>
+                <div class="col-md-4">
+                    <label class="i-check" >
+                      <input formControlName="projectType" type="radio" name="projectType" [value]="projectTypes.Nonbillable"> 
+                      <span>Non-Billable</span>
+                    </label>
+                </div>
+              </div>
+          </div>
+        </div>
+      </mat-tab>
+      <mat-tab label="Team">
+        <div class="body table-responsive">
+          <table class="table table-hover table-striped">
+            <tr>
+              <th>Team</th>
+              <th>Project Manager</th>
+            </tr>
+            <tr *ngFor="let member of listMember">
+              <td>
+                <button type="button" (click)="removeMember(member)" mat-icon-button><mat-icon>clear</mat-icon></button>
+                {{member.name}}
+              </td>
+              <td>
+                <mat-checkbox [(ngModel)]="member.isProjectAdmin" [ngModelOptions]="{standalone: true}"></mat-checkbox>
+              </td>
+            </tr>
+          </table>
+          <common-input
+                type="autocomplete"
+                fullWidth="true"
+                (selected)="selectTeam($event)"
+                [formControl]="memberForm"
+                [data]="{
+                  labelTop: 'Name',
+                  idType: 'empty',
+                  api: searchTeamApi.bind(this)
+                }"
+          ></common-input>
+        </div>
+      </mat-tab>
+      <mat-tab label="Tasks">
+        <div class="body table-responsive">
+          <table class="table table-hover table-striped">
+            <tr>
+              <th>Tasks</th>
+              <th>Billable</th>
+            </tr>
+            <tr *ngFor="let task of listTask">
+              <td>
+                <button type="button" (click)="removeTask(task)" mat-icon-button><mat-icon>clear</mat-icon></button>
+                {{task.name}}
+              </td>
+              <td>
+                <mat-checkbox [(ngModel)]="task.billable" [ngModelOptions]="{standalone: true}"></mat-checkbox>
+              </td>
+            </tr>
+          </table>
+          <common-input
+              type="autocomplete"
+              fullWidth="true"
+              (selected)="selectTask($event)"
+              [formControl]="taskForm"
+              [data]="{
+                labelTop: 'Name',
+                idType: 'empty',
+                api: searchTaskApi.bind(this)
+              }"
+        ></common-input>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
+    </mat-dialog-content>
+  <div mat-dialog-actions align="end">
+    <button mat-button  type="button"  (click)="close(false)">
+      Cancel
+    </button>
+    <button mat-flat-button color="primary" type="submit" flex="15">
+      Save
+    </button>
+  </div>
+</form>

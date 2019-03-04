@@ -1,0 +1,44 @@
+<div class="row">
+  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+    <div class="card main-content">
+      <div class="header">
+        <p>View by Projects:</p>
+        <h2><b>Pending Approval</b></h2>
+      </div>
+      <div class="body">
+        <mat-form-field>
+          <mat-select >
+            <mat-option value="option1">Option 1</mat-option>
+            <mat-option value="option2">Option 2</mat-option>
+            <mat-option value="option3">Option 3</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <div class="table-responsive">
+          <table *ngFor="let item of data" class="table table-hover table-striped">
+            <thead>
+              <tr>
+                <!-- <th colspan="3">{{ item.title }}</th> -->
+                <th colspan="2">{{ item.title }}</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- <tr class="pointer" (click)="detail()">
+                <td><b>{{ item.name }}</b></td>
+                <td>{{ item.startDate }} - {{ item.endDate }}</td>
+                <td>{{ item.totalWorkingTime }}</td>
+              </tr> -->
+              <tr *ngFor="let tsh of item.items" class="pointer" (click)="showDetailDialog(tsh)">
+                <!-- <td>{{ timesheet.member.name }}</td> -->
+                <td>{{ tsh.startDate }} - {{ tsh.endDate }}</td>
+                <td>{{ tsh.totalWorkingTime }}</td>
+              </tr>
+            </tbody>
+          </table>
+          <button  mat-flat-button color="primary" class="pull-left" >
+            Approve All Timesheets
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

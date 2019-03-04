@@ -1,0 +1,25 @@
+.inline{
+    display: inline-block !important;
+}
+.i-check{
+    cursor: pointer;
+    display: block;
+    width: 100%;
+    text-align: center;
+}
+.i-check input{
+    display: none;
+}
+.i-check span{
+    display: block;
+    position: relative;
+    padding: 10px;
+    border: solid 1px #c1c1c1;
+    width: 100%;
+    border-radius: 5px;
+}
+.i-check input:checked + span{
+    border-color: #f36c00;
+    background: #f36c00;
+    color: white;
+}

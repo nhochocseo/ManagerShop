@@ -1,0 +1,89 @@
+<mat-dialog-content style="width:900px">
+  <div class="row" style="min-width:800px">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div *ngIf="timesheet" class="main-content" style="height:400px;">
+          <div class="header">
+            <h3><b>Approve {{ timesheet.member.name }}'s Timesheet for {{ timesheet.startDate }}-{{ timesheet.endDate }}</b></h3>
+            <h4><b>Pending Hours</b></h4>
+          </div>
+          <div class="body table-responsive">
+            <table class="table table-hover ">
+              <thead>
+                <tr>
+                  <th></th>
+                  <th class="text-center">
+                    <h5>Mon</h5>
+                    <p>04Feb</p>
+                  </th>
+                  <th class="text-center">
+                      <h5>Tue</h5>
+                      <p>05Feb</p>
+                    </th>
+                    <th class="text-center">
+                      <h5>Wed</h5>
+                      <p>06Feb</p>
+                    </th>
+                    <th class="text-center">
+                      <h5>Thu</h5>
+                      <p>07Feb</p>
+                    </th>
+                    <th class="text-center">
+                      <h5>Fri</h5>
+                      <p>08Feb</p>
+                    </th>
+                    <th class="text-center">
+                      <h5>Sat</h5>
+                      <p>09Feb</p>
+                    </th>
+                    <th class="text-center">
+                      <h5>Sun</h5>
+                      <p>10Feb</p>
+                    </th> 
+                    <th></th> 
+                    <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                  <tr *ngFor="let item of timesheet.timesheetItems">
+                    <td>
+                      <p><b>{{ item.projectName }}</b></p>
+                      <p>{{ item.taskName }}</p>
+                    </td>
+                    <td matTooltip="{{ item.mon.tooltip }}">{{ item.mon.hours }}</td>
+                    <td matTooltip="{{ item.tue.tooltip }}">{{ item.tue.hours }}</td>
+                    <td matTooltip="{{ item.wed.tooltip }}">{{ item.wed.hours }}</td>
+                    <td matTooltip="{{ item.thu.tooltip }}">{{ item.thu.hours }}</td>
+                    <td matTooltip="{{ item.fri.tooltip }}">{{ item.fri.hours }}</td>
+                    <td matTooltip="{{ item.sat.tooltip }}">{{ item.sat.hours }}</td>
+                    <td matTooltip="{{ item.sun.tooltip }}">{{ item.sun.hours }}</td>
+                    <td>{{ item.total.hours }}</td>
+                    <td></td>
+                  </tr>
+                  <!-- <tr>
+                    <td>
+                      <p><b>[SAMPLE]MonthyRetainer</b>([SAMPLE]Client C)</p>
+                      <p>Business Development</p>
+                    </td>
+                    <td>0</td>
+                    <td></td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>3:39</td>
+                    <td>5</td>
+                    <td>0</td>
+                    <td>8:39</td>
+                    <td></td>
+                  </tr> -->
+              </tbody>
+            </table>
+            <button mat-flat-button color="accent" class="pull-left" >
+              Approve Timesheet
+            </button>
+            <button mat-flat-button color="primary" class="pull-left" style="margin-left:20px;" >
+              Email Tien Pham
+            </button>
+          </div>
+        </div>
+      </div>
+  </div>
+</mat-dialog-content>

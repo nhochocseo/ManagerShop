@@ -1,0 +1,88 @@
+<form [formGroup]="formTimesheetItem" (ngSubmit)="save()">
+  <div class="row">
+    <div class="col-md-10">
+      <p class="text-center">{{title}}</p>
+    </div>
+    <div class="col-md-2">
+      <p class="text-right">Time date entry</p>
+    </div>
+  </div>
+  <mat-divider></mat-divider>
+  <mat-dialog-content style="width:800px">
+    <common-input
+                type="select"
+                fullWidth="true"
+                [formControl]="formTimesheetItem.controls.projectId"
+                [data]="{
+                  labelTop: 'Project',
+                  options: listProject
+                }"
+    >
+    </common-input>
+    <common-input
+                type="select"
+                fullWidth="true"
+                [formControl]="formTimesheetItem.controls.taskId"
+                [data]="{
+                  labelTop: 'Task',
+                  options: listTask
+                }"
+    >
+    </common-input>
+    <div class="row">
+      <div class="col-md-8">
+        <common-input
+                    type="textarea"
+                    fullWidth="true"
+                    [formControl]="formTimesheetItem.controls.note"
+                    [data]="{
+                      labelTop: 'Note'
+                    }"
+        >
+        </common-input>
+      </div>
+      <div class="col-md-4">
+        <common-input
+                    type="text"
+                    fullWidth="true"
+                    [formControl]="formTimesheetItem.controls.workingTime"
+                    [data]="{
+                      labelTop: 'Time Work'
+                    }"
+        >
+        </common-input>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-8">
+        <common-input
+                    type="select"
+                    fullWidth="true"
+                    [formControl]="formTimesheetItem.controls.typeOfWork"
+                    [data]="{
+                      labelTop: 'Type Of Work',
+                      none: 'false',
+                      options: listTypeWork
+                    }"
+        >
+        </common-input>
+      </div>
+      <div class="col-md-4">
+        <mat-checkbox formControlName="isCharged">Charged</mat-checkbox>
+      </div>
+    </div>
+  </mat-dialog-content>
+  <div mat-dialog-actions align="end">
+      <button mat-button type="button" (click)="close(false)">
+        Cancel
+      </button>
+      <button
+        mat-flat-button
+        type="submit"
+        flex="15"
+        color="primary"
+      >
+        Save
+      </button>
+    </div>
+</form>
