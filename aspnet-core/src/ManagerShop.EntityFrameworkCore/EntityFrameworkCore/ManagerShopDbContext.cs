@@ -4,6 +4,7 @@ using CVD.Authorization.Roles;
 using CVD.Authorization.Users;
 using CVD.MultiTenancy;
 using CVD.Entities;
+using ManagerShop.Entities;
 
 namespace CVD.EntityFrameworkCore
 {
@@ -18,8 +19,8 @@ namespace CVD.EntityFrameworkCore
         public DbSet<ProjectRole> ProjectRoles { get; set; }
         public DbSet<Task> Tasks { get; set; }
         public DbSet<ProjectTask> TaskProjects { get; set; }
-        public DbSet<ManagerShop> ManagerShops { get; set; }
         public DbSet<ManagerShopItem> ManagerShopItems { get; set; }
+        public DbSet<Category> Categories { get; set; }
 
         public ManagerShopDbContext(DbContextOptions<ManagerShopDbContext> options)
             : base(options)
@@ -38,10 +39,6 @@ namespace CVD.EntityFrameworkCore
 
             // Member
             modelBuilder.Entity<Member>().HasMany<ProjectMember>(g => g.ProjectMembers);
-            modelBuilder.Entity<Member>().HasMany<ManagerShop>(g => g.ManagerShops);
-
-            // ManagerShop
-            modelBuilder.Entity<ManagerShop>().HasMany<ManagerShopItem>(g => g.ManagerShopItems);
 
             //ManagerShop Item
             //modelBuilder.Entity<ManagerShopItem>()

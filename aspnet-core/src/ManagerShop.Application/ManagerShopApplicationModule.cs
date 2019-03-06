@@ -3,7 +3,6 @@ using Abp.Modules;
 using Abp.Reflection.Extensions;
 using CVD.Authorization;
 using CVD.ManagerShops.Projects;
-using CVD.ManagerShops.ManagerShops;
 
 namespace CVD
 {
@@ -30,7 +29,6 @@ namespace CVD
 
             //Adding custom AutoMapper configuration
             Configuration.Modules.AbpAutoMapper().Configurators.Add(ProjectMapper.CreateMappings);
-            Configuration.Modules.AbpAutoMapper().Configurators.Add(ManagerShopMapper.CreateMapping);
         }
     }
 }

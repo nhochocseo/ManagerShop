@@ -50,55 +50,7 @@ namespace CVD.ManagerShops.Projects
                 Code = ResponseCode.Success
             };
         }
-
-        public async Task<IEnumerable<ProjectDetailTaskDto>> GetProjectDetailTask(DateTime? fromDate, DateTime? toDate, long projectId)
-        {
-            var taskHour =
-                from tsItem in WorkScope.All<ManagerShopItem>()
-                .Where(s => s.ProjectId == projectId)
-
-                join ManagerShop in WorkScope.All<ManagerShop>()
-                .Where(s => fromDate == null || s.ApprovedDate >= fromDate)
-                .Where(s => toDate == null || s.ApprovedDate <= toDate)
-                on tsItem.ManagerShopId equals ManagerShop.Id
-
-                group tsItem by tsItem.TaskId into taskGroup
-
-                join task in WorkScope.All<Entities.Task>()
-                on taskGroup.Key equals task.Id
-                select new ProjectDetailTaskDto
-                {
-                    Id = taskGroup.Key,
-                    Name = task.Name,
-                    BillableStatus = task.Billable,
-                    Hours = taskGroup.Sum(s => s.WorkingTime)
-                };
-            return await taskHour.ToListAsync();
-        }
-
-        public async Task<IEnumerable<ProjectDetailTeamDto>> GetProjectDetailTeam(DateTime? fromDate, DateTime? toDate, long projectId)
-        {
-            var teamHours =
-                from tsItem in WorkScope.All<ManagerShopItem>()
-                .Where(s => s.ProjectId == projectId)
-
-                join ManagerShop in WorkScope.All<ManagerShop>()
-                .Where(s => fromDate == null || s.ApprovedDate >= fromDate)
-                .Where(s => toDate == null || s.ApprovedDate <= toDate)
-                on tsItem.ManagerShopId equals ManagerShop.Id
-
-                group tsItem by tsItem.ManagerShop.MemberId into memberGroup
-
-                join member in WorkScope.All<Member>()
-                on memberGroup.Key equals member.Id
-                select new ProjectDetailTeamDto
-                {
-                    Id = memberGroup.Key,
-                    Name = member.Name,
-                    Hours = memberGroup.Sum(s => s.WorkingTime)
-                };
-            return await teamHours.ToListAsync();
-        }
+        
 
     }
 }

@@ -21,7 +21,6 @@ namespace CVD.Entities
         public string Email { get; set; }
 
         public IList<ProjectMember> ProjectMembers { get; set; }
-        public IList<ManagerShop> ManagerShops { get; set; }
 
         public User User { get; set; }
         public long? UserId { get; set; }

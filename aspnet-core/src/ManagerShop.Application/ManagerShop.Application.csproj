@@ -16,4 +16,7 @@
   <ItemGroup>
     <ProjectReference Include="..\ManagerShop.Core\ManagerShop.Core.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ManagerShop\Categorys\Dto\" />
+  </ItemGroup>
 </Project>

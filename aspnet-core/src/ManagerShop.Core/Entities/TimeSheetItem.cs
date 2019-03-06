@@ -21,6 +21,5 @@ namespace CVD.Entities
         public string Note { get; set; }
         public Project Project { get; set; }
         public Task Task { get; set; }
-        public ManagerShop ManagerShop { get; set; }
     }
 }
