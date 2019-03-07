@@ -9,7 +9,7 @@ import { EventEmitter } from '@angular/core';
 // }
 export abstract class InputTypeBase<T> {
   formControlInput: AbstractControl;
- 
+
   _data: any = {};
 
   get data() {
@@ -71,6 +71,7 @@ export interface IDataTextarea extends IDataInput {
   rows?: any;
 }
 
+// tslint:disable-next-line:no-empty-interface
 export interface IDataDate extends IDataInput {
 
 }

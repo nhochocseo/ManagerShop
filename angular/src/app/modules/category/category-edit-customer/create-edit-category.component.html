@@ -1,6 +1,6 @@
 <form [formGroup]="formEdit" (ngSubmit)="save()">
   <h1 mat-dialog-title>{{title}}</h1>
-  <mat-dialog-content style="width:800px">
+  <mat-dialog-content>
     <common-input type="text" fullWidth="true" formControlName="name" [data]="{
                   labelTop: 'Tên danh mục'
                 }">

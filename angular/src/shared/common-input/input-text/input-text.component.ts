@@ -1,4 +1,4 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit, Input} from '@angular/core';
 import { Observable } from 'rxjs';
 import { IDataText, InputTypeBase } from '../input-type.interface';
 import { map, startWith } from 'rxjs/operators';
@@ -14,29 +14,14 @@ export class InputTextComponent extends InputTypeBase<IDataText> implements OnIn
   options: any;
   labelTop: any;
   filteredOptions: Observable<any[]>;
-  label: any = 'never';
-
-  set data(data: IDataText) {
-    if (!data) return;
-    if (data.placeholder) {
-      this.placeholder = data.placeholder;
-    }
-    if (data.options) {
-      this.options = data.options;
-    }
-    if (data.labelTop){
-      this.labelTop = data.labelTop;
-      this.label = 'always';
-    }
-  }
-
-  ngOnInit(){
-    if(this.options != undefined && this.options != null && this.options != ''){
+  @Input() label: any;
+  ngOnInit() {
+    if (this.options !== undefined && this.options != null && this.options !== '') {
       this.filteredOptions = this.formControlInput.valueChanges
       .pipe(
         startWith(''),
         map(value => this._filter(value))
-      )
+      );
     }
   }
 
@@ -45,4 +30,18 @@ export class InputTextComponent extends InputTypeBase<IDataText> implements OnIn
     return this.options.filter(option => option.toLowerCase().includes(filterValue));
   }
 
+  set data(data: IDataText) {
+    if (!data) { return; }
+    if (data.placeholder) {
+      this.placeholder = data.placeholder;
+    }
+    if (data.options) {
+      this.options = data.options;
+    }
+    console.log(data.labelTop);
+    if (data.labelTop) {
+      this.labelTop = data.labelTop;
+      this.label = 'always';
+    }
+  }
 }

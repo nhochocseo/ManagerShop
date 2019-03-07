@@ -124,102 +124,89 @@ constructor(
   private controlContainer: ControlContainer,
 ) { }
 
-writeValue(value: any): void {
-  this._renderer.setProperty(this._elementRef.nativeElement, 'value', value);
-}
-
-@HostListener('change') change($event) {
-  if ($event && $event.target) {
-    this._onChange($event.target.value);
-  }
-}
-
-registerOnChange(fn: any): void {
-  this._onChange = fn;
-}
-
-@HostListener('blur') blur() {
-  this._onTouched();
-}
-
-registerOnTouched(fn: any): void {
-  this._onTouched = fn;
-}
-
-setDisabledState?(isDisabled: boolean): void {
-  this._renderer.setProperty(this._elementRef.nativeElement, 'disabled', isDisabled);
-}
-
-ngOnInit(): void {
-  if (!this.md && !this.xl && !this.lg && !this.sm) {
-    this.md = this.xl = '3-7';
+  writeValue(value: any): void {
+    this._renderer.setProperty(this._elementRef.nativeElement, 'value', value);
   }
 
-  // console.log(this.formControl);
-  this.initClassForLabelAndInput();
-  if (this.controlContainer && this.formControlName) {
-    this.formControl = this.controlContainer.control.get(this.formControlName);
-  }
-  // set some default
-  if (this.formControl && this.formControl.enabled) {
-    this.setDisplay();    
-  } else {
-    this._disabled = true;
-  }
-  
-  if (this._display) {
-    this.disable();
-  }
-}
-
-setDisplay(): any {
-  if (!this.formControl) {
-    return;
-  }
-  
-  if (this._display && this.formControl.disabled) {
-    console.log(this.getNameControl(), 'enable');
-    this.formControl.enable();
+  @HostListener('change') change($event) {
+    if ($event && $event.target) {
+      this._onChange($event.target.value);
+    }
   }
 
-  if (!this._display && this.formControl.enabled) {
-    // use ngif
-    this.componentRef = null;
-    console.log(this.getNameControl(), 'disable');
-    this.formControl.disable();
+  registerOnChange(fn: any): void {
+    this._onChange = fn;
   }
-}
 
-ngAfterViewInit(): void {
-}
-
-private disable() {
-  if (this._disabled) {
-    this.formControl.disable({
-      emitEvent: false
-    });
-  } else {
-    this.formControl.enable({
-      emitEvent: false
-    });
+  @HostListener('blur') blur() {
+    this._onTouched();
   }
-}
 
-createInputComponent(entry: ViewContainerRef) {
-  console.log(entry);
-  entry.clear();
-  const component = this.helper.getInputComponentByType(this.type);
-
-  if (!component) {
-    alert('error');
+  registerOnTouched(fn: any): void {
+    this._onTouched = fn;
   }
-  const factory = this.resolver.resolveComponentFactory(component);
-  this.componentRef = entry.createComponent(factory);
-  console.log(this.componentRef);
 
-  (<InputTypeBase<any>>this.componentRef.instance).formControlInput = this.formControl;
-  this.initDataForChild(this.data);
-}
+  setDisabledState?(isDisabled: boolean): void {
+    this._renderer.setProperty(this._elementRef.nativeElement, 'disabled', isDisabled);
+  }
+
+  ngOnInit(): void {
+    if (!this.md && !this.xl && !this.lg && !this.sm) {
+      this.md = this.xl = '3-7';
+    }
+
+    // console.log(this.formControl);
+    this.initClassForLabelAndInput();
+    if (this.controlContainer && this.formControlName) {
+      this.formControl = this.controlContainer.control.get(this.formControlName);
+    }
+    // set some default
+    if (this.formControl && this.formControl.enabled) {
+      this.setDisplay();
+    } else {
+      this._disabled = true;
+    }
+
+    if (this._display) {
+      this.disable();
+    }
+  }
+
+  setDisplay(): any {
+    if (!this.formControl) {
+      return;
+    }
+
+    if (this._display && this.formControl.disabled) {
+      console.log(this.getNameControl(), 'enable');
+      this.formControl.enable();
+    }
+
+    if (!this._display && this.formControl.enabled) {
+      // use ngif
+      this.componentRef = null;
+      console.log(this.getNameControl(), 'disable');
+      this.formControl.disable();
+    }
+  }
+
+  ngAfterViewInit(): void {
+  }
+
+  createInputComponent(entry: ViewContainerRef) {
+    entry.clear();
+    const component = this.helper.getInputComponentByType(this.type);
+    if (!component) {
+      alert('error');
+    }
+    const factory = this.resolver.resolveComponentFactory(component);
+    this.componentRef = entry.createComponent(factory);
+
+    (<InputTypeBase<any>>this.componentRef.instance).formControlInput = this.formControl;
+    this.initDataForChild(this.data);
+    // fix Expression has changed after it was checked.
+    this.componentRef.changeDetectorRef.detectChanges();
+  }
 
 initDataForChild(data: any) {
   if (this.componentRef && data) {
@@ -347,4 +334,17 @@ ngOnDestroy(): void {
     this._entry.clear();
   }
 }
+
+private disable() {
+  if (this._disabled) {
+    this.formControl.disable({
+      emitEvent: false
+    });
+  } else {
+    this.formControl.enable({
+      emitEvent: false
+    });
+  }
+}
+
 }

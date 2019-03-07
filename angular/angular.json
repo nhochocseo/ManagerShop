@@ -41,6 +41,7 @@
               "node_modules/node-waves/dist/waves.css",
               "src/bsb-theme/css/materialize.css",
               "src/bsb-theme/css/style.css",
+              "src/bsb-theme/css/reponsive.css",
               "src/bsb-theme/css/themes/all-themes.css",
               "src/shared/core.less"
             ],

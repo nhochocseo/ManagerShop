@@ -14,7 +14,7 @@ export class CommonInputService {
 
   getInputComponentByType(type: any): any {
     let component;
-      switch(type){
+      switch (type) {
         case 'text':
         component = InputTextComponent;
         break;
@@ -22,7 +22,7 @@ export class CommonInputService {
         case 'textarea':
         component = InputTextareaComponent;
         break;
-        
+
         case 'select':
         component = InputSelectComponent;
         break;
@@ -30,7 +30,7 @@ export class CommonInputService {
         case 'radio':
         component = InputRadioComponent;
         break;
-        
+
         case 'autocomplete':
         component = InputAutocompeteComponent;
         break;
