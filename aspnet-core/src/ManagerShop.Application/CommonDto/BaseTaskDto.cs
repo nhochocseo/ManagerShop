@@ -1,9 +1,5 @@
 ﻿using Abp.Application.Services.Dto;
 using Abp.AutoMapper;
-using Abp.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using CVD.Entities;
 using static CVD.Entities.Enum.StatusEnum;
 

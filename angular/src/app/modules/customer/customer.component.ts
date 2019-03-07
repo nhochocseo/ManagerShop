@@ -37,7 +37,7 @@ export class CustomerComponent extends TableComponentBase implements OnInit {
       sorts: ['', Validators.required],
       page: [this.pageDto.currentPage, Validators.required],
       pageSize: [this.pageDto.pageSize, Validators.required]
-    })
+    });
     this.search();
   }
 

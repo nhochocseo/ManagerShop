@@ -17,6 +17,8 @@ import { CreateProjectComponent } from './create-project/create-project.componen
     FormsModule,
     CustomerModule
   ],
-  entryComponents:[CreateProjectComponent,CreateEditCustomerComponent]
+  entryComponents: [
+    CreateProjectComponent,
+    CreateEditCustomerComponent]
 })
 export class ProjectManagerModule { }
