@@ -2,6 +2,7 @@ import { AppRouteGuard } from './../../shared/auth/auth-route-guard';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { MainComponent } from './main.component';
+import { CategoryComponent } from './category/category.component';
 const routes: Routes = [
   {
     path: 'project-manager',
@@ -87,10 +88,29 @@ const routes: Routes = [
         }
       ]
     }]
+  },
+  {
+    path: 'category',
+    component: MainComponent,
+    canActivate: [AppRouteGuard],
+    children: [{
+      path: '',
+      children: [
+        {
+          path: '',
+          loadChildren: '../modules/category/category.module#CategoryModule',
+          data: {
+            preload: true
+          }
+        }
+      ]
+    }]
   }
-]
+];
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class MainRoutingModule { }
+export class MainRoutingModule {
+
+}

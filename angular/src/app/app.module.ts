@@ -37,6 +37,8 @@ import { EditUserDialogComponent } from '@app/users/edit-user/edit-user-dialog.c
 import { ChangePasswordComponent } from './users/change-password/change-password.component';
 import { ResetPasswordDialogComponent } from './users/reset-password/reset-password.component';
 import { MytimesheetModule } from './modules/mytimesheet/mytimesheet.module';
+import { CategoryModule } from './modules/category/category.module';
+import { CategoryComponent } from './modules/category/category.component';
 
 
 @NgModule({
@@ -76,7 +78,8 @@ import { MytimesheetModule } from './modules/mytimesheet/mytimesheet.module';
     ServiceProxyModule,
     SharedModule,
     NgxPaginationModule,
-    MytimesheetModule
+    MytimesheetModule,
+    CategoryModule
   ],
   providers: [],
   entryComponents: [

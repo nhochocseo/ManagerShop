@@ -22,7 +22,7 @@ export abstract class BaseApiService {
     protected getUrl(url: string) {
         return this.baseUrl + this.changeUrl() + '/' + url;
     }
-    
+
     //
     getOne(id: any, includes: string = ''): Observable<any> {
         return this.http.get(this.rootUrl + '/Get?' + `id=${id}&includes=${includes}`);
@@ -34,6 +34,7 @@ export abstract class BaseApiService {
     filter(key: FilterRequest): Observable<any> {
         return this.http.get(this.rootUrl + '/Filter?' + `Includes=${key.includes}&Filters=${key.filters}&Sorts=${key.sorts}&Page=${key.page}&PageSize=${key.pageSize}`);
     }
+
     delete(id: any): Observable<any> {
         return this.http.delete(this.rootUrl + '/Delete?' + `id=${id}`);
     }
