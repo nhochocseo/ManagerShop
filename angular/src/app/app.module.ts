@@ -38,7 +38,6 @@ import { ChangePasswordComponent } from './users/change-password/change-password
 import { ResetPasswordDialogComponent } from './users/reset-password/reset-password.component';
 import { MytimesheetModule } from './modules/mytimesheet/mytimesheet.module';
 import { CategoryModule } from './modules/category/category.module';
-import { CategoryComponent } from './modules/category/category.component';
 
 
 @NgModule({

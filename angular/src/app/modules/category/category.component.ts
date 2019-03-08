@@ -21,7 +21,7 @@ import { CategoryManagerService } from '@app/service/api/category.service';
 export class CategoryComponent extends TableComponentBase implements OnInit {
   appForm: FormGroup;
   constructor(
-    private taskService: CategoryManagerService,
+    private cateService: CategoryManagerService,
     private fb: FormBuilder,
     private _dialog: MatDialog,
     injector: Injector
@@ -48,6 +48,7 @@ export class CategoryComponent extends TableComponentBase implements OnInit {
   }
 
   buildData(data: Array<any>) {
+    console.log(data);
     return _(data)
     .groupBy(x => x.type)
     .map((value, key) => ({items: value}))
@@ -55,7 +56,8 @@ export class CategoryComponent extends TableComponentBase implements OnInit {
   }
 
   searchApi(param: FilterRequest): Observable<any> {
-    return this.taskService.filterAndPaging(param);
+    console.log(this.cateService.filterAndPaging(param));
+    return this.cateService.filterAndPaging(param);
   }
 
   create(): void {
@@ -82,8 +84,8 @@ export class CategoryComponent extends TableComponentBase implements OnInit {
     this.showCreateOrEditDialog(data);
   }
   delete(data: any): void {
-    this.taskService.delete(data.id).subscribe(res => {
-      this.notify.success(this.l('Delete Customer Successfully'));
+    this.cateService.delete(data.id).subscribe(res => {
+      this.notify.success(this.l('Xóa thành công'));
       this.search();
     });
   }

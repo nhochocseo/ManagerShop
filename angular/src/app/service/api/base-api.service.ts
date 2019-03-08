@@ -7,7 +7,6 @@ export const API_BASE_URL = new InjectionToken<string>('API_BASE_URL');
 
 export abstract class BaseApiService {
     protected baseUrl = AppConsts.remoteServiceBaseUrl;
-    
     protected get rootUrl() {
         return this.baseUrl + this.changeUrl();
     }
@@ -22,7 +21,6 @@ export abstract class BaseApiService {
     protected getUrl(url: string) {
         return this.baseUrl + this.changeUrl() + '/' + url;
     }
-
     //
     getOne(id: any, includes: string = ''): Observable<any> {
         return this.http.get(this.rootUrl + '/Get?' + `id=${id}&includes=${includes}`);

@@ -64,14 +64,14 @@ export class ProjectManagerComponent extends TableComponentBase implements OnIni
       id: project.id,
       status: this.APP_CONSTANT.EnumProjectStatus.Deactive
     }).subscribe(res => {
-      this.notify.success(this.l('Delete Customer Successfully'));
+      this.notify.success(this.l('Xóa thành công'));
       this.search();
     })
   }
 
   deleteProject(project): void {
     this.projectManagerService.delete(project.id).subscribe(res => {
-      this.notify.success(this.l('Delete Customer Successfully'));
+      this.notify.success(this.l('Xóa thành công'));
       this.search();
     })
   }

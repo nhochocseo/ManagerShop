@@ -82,8 +82,8 @@ export class TaskComponent extends TableComponentBase implements OnInit {
   }
   deleteTask(task): void {
     this.taskService.delete(task.id).subscribe(res => {
-      this.notify.success(this.l('Delete Customer Successfully'));
+      this.notify.success(this.l('Xóa thành công'));
       this.search();
-    })
+    });
   }
 }

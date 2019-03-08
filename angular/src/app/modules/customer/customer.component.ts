@@ -62,7 +62,7 @@ export class CustomerComponent extends TableComponentBase implements OnInit {
 
   deleteCustomer(cutomer): void {
     this.customerService.delete(cutomer.id).subscribe(res => {
-      this.notify.success(this.l('Delete Customer Successfully'));
+      this.notify.success(this.l('Xóa thành công'));
       this.search();
     })
   }
