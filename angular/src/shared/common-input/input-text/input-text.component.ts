@@ -38,7 +38,6 @@ export class InputTextComponent extends InputTypeBase<IDataText> implements OnIn
     if (data.options) {
       this.options = data.options;
     }
-    console.log(data.labelTop);
     if (data.labelTop) {
       this.labelTop = data.labelTop;
       this.label = 'always';

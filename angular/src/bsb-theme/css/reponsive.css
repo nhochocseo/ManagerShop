@@ -1,0 +1,25 @@
+.cdk-global-overlay-wrapper .cdk-overlay-pane {
+    width: auto;
+    min-width: 25%;
+}
+
+@media (max-width: 1300px) { 
+    .cdk-global-overlay-wrapper .cdk-overlay-pane {
+        min-width: 35%;
+    }
+}
+@media (max-width: 1200px) { 
+    .cdk-global-overlay-wrapper .cdk-overlay-pane {
+        min-width: 40%;
+    }
+}
+@media (max-width: 768px) { 
+    .cdk-global-overlay-wrapper .cdk-overlay-pane {
+        min-width: 50%;
+    }
+}
+@media (max-width: 411px) { 
+    .cdk-global-overlay-wrapper .cdk-overlay-pane {
+        min-width: 80%;
+    }
+}
